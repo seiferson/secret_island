@@ -16,44 +16,95 @@
     <br />
     <br />
     <br />
-      <h2>Journal</h2>
-      <div class="ui feed">
-        <div class="event">
-          <div class="label">
-            <img src="https://avatars.dicebear.com/api/open-peeps/seiferson.svg?head=mohawk&face=blank&skinColor=variant02&hairColor=variant06" />
-          </div>
-          <div class="content">
-            <div class="summary">
-              <a class="user" href="https://github.com/seiferson">@seiferson</a>
-              <div class="date">Dec 5th 2022</div>
-            </div>
-            <div class="extra text">
-              I have created a basic spring boot project and deployed it using Heroku.
-            </div>
-          </div>
-        </div>
-        <div class="event">
-          <div class="label">
-            <img src="https://avatars.dicebear.com/api/open-peeps/seiferson.svg?head=mohawk&face=blank&skinColor=variant02&hairColor=variant06" />
-          </div>
-          <div class="content">
-            <div class="summary">
-              <a class="user" href="https://github.com/seiferson">@seiferson</a>
-              <div class="date">Dec 6th 2022</div>
-            </div>
-            <div class="extra text">
-              I have added FomanticUI CSS framework
-            </div>
-          </div>
-        </div>
+
+    <h2>Journal</h2>
+    <div class="ui placeholder" id="feed_placeholder">
+      <div class="image header">
+        <div class="line"></div>
+        <div class="line"></div>
       </div>
+      <div class="image header">
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+      <div class="image header">
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+      <div class="image header">
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+    </div>
+
+    <div class="ui feed" id="feed">
+    </div>
+
     <br />
     <br />
     <br />
+
     <p>Powered by <a href="https://www.heroku.com/">Heroku</a> and <a href="https://www.mongodb.com/">Atlas</a></p>
     <p><a href="https://github.com/seiferson">@seiferson</a>  2022</p>
     <p><a href="/api/v1">API</a></p>
   </div>
 </div>
+
+<script>
+  fetch('/api/v1/hPosts')
+    .then(response => {
+      return response.json();
+    })
+    .then( response => {
+      if(response.page.totalElements > 0) {
+        document.getElementById('feed_placeholder').remove();
+        var feed = document.getElementById('feed');
+        response._embedded.hPosts.forEach(hPost => {
+          var post = document.createElement("div");
+          post.classList.add("event")
+
+          var label = document.createElement("div");
+          label.classList.add("label");
+
+          var img = document.createElement('img');
+          img.src = "https://avatars.dicebear.com/api/open-peeps/seiferson.svg?head=mohawk&face=blank&skinColor=variant02&hairColor=variant06";
+
+          label.appendChild(img);
+          post.appendChild(label);
+
+          var content = document.createElement("div");
+          content.classList.add("content");
+
+          var summary = document.createElement("div");
+          summary.classList.add("summary");
+
+          var author = document.createElement("a");
+          author.classList.add("user");
+          author.href = "https://github.com/" + hPost.author;
+          var authorText = document.createTextNode("@" + hPost.author);
+          author.appendChild(authorText);
+          summary.appendChild(author);
+
+          var date =  document.createElement("div");
+          date.classList.add("date");
+          var dateText = document.createTextNode(hPost.postedDate);
+          date.appendChild(dateText);
+
+          summary.appendChild(date);
+          content.appendChild(summary);
+
+          var text = document.createElement("div");
+          text.classList.add("extra");
+          text.classList.add("text");
+          var contentText = document.createTextNode(hPost.content);
+          text.appendChild(contentText);
+
+          content.appendChild(text);
+          post.appendChild(content);
+          feed.appendChild(post);
+        });
+      }
+    });
+</script>
 </body>
 </html>
