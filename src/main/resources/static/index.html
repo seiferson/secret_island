@@ -75,10 +75,10 @@
         return response.json();
       })
       .then( response => {
-        if(response.page.totalElements > 0) {
+        if(response.numberOfElements > 0) {
           document.getElementById('feed_placeholder').remove();
           var feed = document.getElementById('feed');
-          response._embedded.hPosts.forEach(hPost => {
+          response.content.forEach(hPost => {
             var post = document.createElement("div");
             post.classList.add("event")
 
