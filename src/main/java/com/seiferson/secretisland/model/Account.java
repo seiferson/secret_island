@@ -3,6 +3,8 @@ package com.seiferson.secretisland.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
+
 @Document
 public class Account {
 
@@ -11,6 +13,7 @@ public class Account {
 
     private String status;
     private String username;
+    private Date joined;
 
     public String getId() {
         return id;
@@ -34,5 +37,13 @@ public class Account {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Date getJoined() {
+        return joined;
+    }
+
+    public void setJoined(Date joined) {
+        this.joined = joined;
     }
 }
