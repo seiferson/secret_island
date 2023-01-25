@@ -76,7 +76,7 @@
   </div>
 
   <script>
-    fetch('/api/v1/hPosts?pageSize=5&sort=postedDate,desc')
+    fetch('/api/v1/hPosts?size=5&sort=postedDate,desc')
       .then(response => {
         return response.json();
       })
