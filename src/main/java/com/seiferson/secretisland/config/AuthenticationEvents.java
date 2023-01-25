@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.security.authentication.event.AuthenticationSuccessEvent;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -22,7 +23,8 @@ public class AuthenticationEvents {
     @EventListener
     public void onSuccess(AuthenticationSuccessEvent event) {
         logger.info("Verifying if account is registered internally");
-        logger.error("class type " +  event.getAuthentication().getPrincipal().getClass().getName());
+        DefaultOAuth2User user = (DefaultOAuth2User) event.getAuthentication().getPrincipal();
+        logger.error("Username: " + user.getAttribute("login"));
         //accountRepo.existsByUsername()
     }
 }
