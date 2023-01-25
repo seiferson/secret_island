@@ -22,7 +22,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET, "/api/v1")
                     .permitAll()
                 .anyRequest()
-                    .authenticated()
+                    .permitAll()
                 .and().oauth2Login()
                 .and().build();
     }
