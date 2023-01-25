@@ -22,9 +22,13 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET, "/api/v1")
                     .permitAll()
                 .anyRequest()
-                    .permitAll()
-                .and().oauth2Login()
-                .and().build();
+                    .authenticated()
+                .and()
+                    .oauth2Login()
+                .and()
+                    .csrf()
+                        .disable()
+                .build();
     }
 
 }
