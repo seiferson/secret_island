@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.security.authentication.event.AuthenticationSuccessEvent;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -19,9 +20,9 @@ public class AuthenticationEvents {
     private AccountRepository accountRepo;
 
     @EventListener
-    public void onSuccess(AuthenticationSuccessEvent success) {
+    public void onSuccess(AuthenticationSuccessEvent event) {
         logger.info("Verifying if account is registered internally");
-        logger.error("principal" + success.getAuthentication().getPrincipal());
-        //accountRepo.existsByUsername(success.getAuthentication().getName())
+        logger.error("class type " +  event.getAuthentication().getPrincipal().getClass().getName());
+        //accountRepo.existsByUsername()
     }
 }
