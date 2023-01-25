@@ -26,7 +26,9 @@
 
     <div class="ui grid">
 
-      <div class="eight wide column"></div>
+      <div class="eight wide column">
+
+      </div>
 
       <div class="eight wide column">
         <div class="ui basic segment">
@@ -66,11 +68,15 @@
         <p>Made with ❤ by <a href="https://github.com/seiferson">@seiferson</a>  2022</p>
         <p><a href="/api/v1">API</a></p>
       </div>
+
+      <br />
+      <br />
+      <br />
     </div>
   </div>
 
   <script>
-    fetch('/api/v1/hPosts')
+    fetch('/api/v1/hPosts?pageSize=5&sort=postedDate,desc')
       .then(response => {
         return response.json();
       })
