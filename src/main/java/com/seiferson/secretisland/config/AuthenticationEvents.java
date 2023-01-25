@@ -21,7 +21,7 @@ public class AuthenticationEvents {
     @EventListener
     public void onSuccess(AuthenticationSuccessEvent success) {
         logger.info("Verifying if account is registered internally");
-        logger.error(success.getAuthentication().getName());
+        logger.error("principal" + success.getAuthentication().getPrincipal());
         //accountRepo.existsByUsername(success.getAuthentication().getName())
     }
 }
