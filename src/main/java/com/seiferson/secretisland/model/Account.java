@@ -4,16 +4,16 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
+import java.util.List;
 
 @Document
 public class Account {
 
     @Id
     private String id;
-
-    private String status;
     private String username;
     private Date joined;
+    private List<String> authorities;
 
     public String getId() {
         return id;
@@ -21,14 +21,6 @@ public class Account {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public String getUsername() {
@@ -45,5 +37,13 @@ public class Account {
 
     public void setJoined(Date joined) {
         this.joined = joined;
+    }
+
+    public List<String> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(List<String> authorities) {
+        this.authorities = authorities;
     }
 }
