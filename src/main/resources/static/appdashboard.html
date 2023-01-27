@@ -5,10 +5,150 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.0/dist/semantic.min.css">
   <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.0/dist/semantic.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <title>Secret Island</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
+<div class="ui top attached menu">
+  <div class="ui item">
+    <a class="ui header" href="#"><i class="campground icon"></i> Secret Island</a>
+  </div>
+  <div class="right menu">
+    <div class="ui item">
+      <img
+              class="ui avatar image"
+              src="https://avatars.dicebear.com/api/open-peeps/seiferson.svg?head=mohawk&face=blank&skinColor=variant02&hairColor=variant06" />
+      <span><b>@seiferson</b></span>
+    </div>
+  </div>
+</div>
 
+<div class="ui container">
+  <br />
+
+
+
+  <h2 class="ui header">App Dashboard</h2>
+  <br />
+  <br />
+  <div class="ui grid">
+
+    <div class="four wide column">
+      <div class="ui fluid vertical secondary menu">
+        <a class="active item" data-tab="logs">
+          <i class="file alternate outline icon"></i> Logs
+        </a>
+        <a class="item" data-tab="users">
+          <i class="user circle icon"></i> Users
+        </a>
+        <a class="item" data-tab="metrics">
+          <i class="chart pie icon"></i> Metrics
+        </a>
+      </div>
+    </div>
+    <div class="twelve wide column">
+      <div class="ui tab" data-tab="logs">
+        <h3 class="ui dividing header">Logs</h3>
+        <br />
+
+        <div class="ui form">
+          <div class="six wide field">
+            <label>com.seiferson.secretisland</label>
+            <select>
+              <option value="ERROR">ERROR</option>
+              <option value="WARN">WARN</option>
+              <option value="INFO">INFO</option>
+              <option value="DEBUG">DEBUG</option>
+              <option value="TRACE">TRACE</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="ui tab" data-tab="users">
+        <h3 class="ui dividing header">Users</h3>
+        <div class="ui middle aligned selection list">
+          <div class="item">
+            <img class="ui avatar image" src="https://avatars.dicebear.com/api/open-peeps/seiferson.svg?head=mohawk&face=blank&skinColor=variant02&hairColor=variant06">
+            <div class="content">
+              <div class="header">seiferson</div>
+            </div>
+          </div>
+          <div class="item">
+            <img class="ui avatar image" src="https://avatars.dicebear.com/api/open-peeps/lindsay.png">
+            <div class="content">
+              <div class="header">lindsay</div>
+            </div>
+          </div>
+          <div class="item">
+            <img class="ui avatar image" src="https://avatars.dicebear.com/api/open-peeps/matthew.png">
+            <div class="content">
+              <div class="header">matthew</div>
+            </div>
+          </div>
+          <div class="item">
+            <img class="ui avatar image" src="https://avatars.dicebear.com/api/open-peeps/jenny.jpg">
+            <div class="content">
+              <div class="header">jenny</div>
+            </div>
+          </div>
+          <div class="item">
+            <img class="ui avatar image" src="https://avatars.dicebear.com/api/open-peeps/veronika.jpg">
+            <div class="content">
+              <div class="header">veronika</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ui tab" data-tab="metrics">
+        <h3 class="ui dividing header">Metrics</h3>
+
+        <div>
+          <canvas id="myChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br />
+  <br />
+  <br />
+
+  <div class="ui segment">
+    <p>Powered by <a href="https://www.heroku.com/">Heroku</a> and <a href="https://www.mongodb.com/">Atlas</a></p>
+    <p>Made with ❤ by <a href="https://github.com/seiferson">@seiferson</a>  2022</p>
+    <p><a href="/api/v1">API</a></p>
+  </div>
+
+  <br />
+  <br />
+  <br />
+</div>
+
+<script>
+    $('.menu .item').tab();
+  </script>
+<script>
+    const ctx = document.getElementById('myChart');
+
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+          label: '# of Votes',
+          data: [12, 19, 3, 5, 2, 3],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
 </body>
 </html>
