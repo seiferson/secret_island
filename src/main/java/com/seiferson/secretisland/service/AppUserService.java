@@ -33,7 +33,6 @@ public class AppUserService extends DefaultOAuth2UserService {
         logger.info("Processing authentication for user " + username);
 
         if(!accountRepo.existsByUsername(username)) {
-            logger.info("New app user, registering at internal DB");
             ArrayList<String> authorities = new ArrayList<>();
             authorities.add("SI_AUTH_USER");
 
