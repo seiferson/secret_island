@@ -35,7 +35,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.POST, "/api/v1/continental/scores")
                     .permitAll()
                 .anyRequest()
-                    .authenticated()
+                    .permitAll()
                 .and()
                 .oauth2Login()
                     .userInfoEndpoint()
