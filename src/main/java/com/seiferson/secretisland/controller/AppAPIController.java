@@ -39,6 +39,11 @@ public class AppAPIController {
 
     @PostMapping("/api/v1/continental/scores")
     private Score registerScore(@RequestBody Score score) {
+        int total = 0;
+        for(int i = 0; i < score.getPoints().length; i++) {
+            total += score.getPoints()[i];
+        }
+        score.setTotal(total);
         return scoreRepo.insert(score);
     }
 
