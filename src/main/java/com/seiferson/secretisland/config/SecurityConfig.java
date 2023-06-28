@@ -37,6 +37,8 @@ public class SecurityConfig {
                 .anyRequest()
                     .permitAll()
                 .and()
+                .csrf()
+                    .disable()
                 .oauth2Login()
                     .userInfoEndpoint()
                         .userService(userService)
