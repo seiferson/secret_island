@@ -33,12 +33,12 @@ public class AppAPIController {
     private static final Logger logger = LoggerFactory.getLogger(AppAPIController.class);
 
     @GetMapping("/api/v1/continental/scores")
-    private Page<Score> getAllScores(Pageable pageable) {
+    public Page<Score> getAllScores(Pageable pageable) {
         return scoreRepo.findAll(pageable);
     }
 
     @PostMapping("/api/v1/continental/scores")
-    private Score registerScore(@RequestBody Score score) {
+    public Score registerScore(@RequestBody Score score) {
         int total = 0;
         for(int i = 0; i < score.getPoints().length; i++) {
             total += score.getPoints()[i];
