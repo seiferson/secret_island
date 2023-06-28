@@ -32,7 +32,7 @@ public class SecurityConfig {
                     .permitAll()
                 .antMatchers(HttpMethod.GET, "/api/v1/continental/scores")
                     .permitAll()
-                .antMatchers(HttpMethod.GET, "/api/v1/continental/scores")
+                .antMatchers(HttpMethod.POST, "/api/v1/continental/scores")
                     .permitAll()
                 .anyRequest()
                     .authenticated()
