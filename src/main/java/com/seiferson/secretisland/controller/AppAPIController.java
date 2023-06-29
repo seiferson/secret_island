@@ -6,6 +6,7 @@ import com.seiferson.secretisland.model.continental.Score;
 import com.seiferson.secretisland.repository.HPostRepository;
 import com.seiferson.secretisland.repository.JournalEntryRepository;
 import com.seiferson.secretisland.repository.ScoreRepository;
+import com.seiferson.secretisland.util.Game;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 public class AppAPIController {
@@ -35,6 +35,44 @@ public class AppAPIController {
     @GetMapping("/api/v1/continental/scores")
     public Page<Score> getAllScores(Pageable pageable) {
         return scoreRepo.findAll(pageable);
+    }
+
+    @GetMapping("/ap1/v1/continental/games")
+    public List<Game> getGamesInfo(Pageable pageable) {
+        List<Score> scores = scoreRepo.findAll();
+        Map<String, Game> games = new HashMap<>();
+
+        for(Score s : scores) {
+            if(!games.containsKey(s.getGame())){
+                Game g = new Game();
+                g.setName(s.getGame());
+                g.setScores(new ArrayList<>());
+                g.getScores().add(s);
+                games.put(s.getGame(), g);
+            } else {
+                games.get(s.getGame()).getScores().add(s);
+            }
+        }
+
+        for(Game g: games.values()) {
+            Integer min = 1000000;
+            String winner = "";
+            Integer total = 0;
+
+            for(Score s: g.getScores()) {
+                total += s.getTotal();
+                if(s.getTotal() < min) {
+                    min = s.getTotal();
+                    winner = s.getPlayer();
+                }
+            }
+
+            g.setWinner(winner);
+            g.setWinnerScore(min);
+            g.setTotalPoints(total);
+        }
+
+        return new ArrayList<>(games.values());
     }
 
     @PostMapping("/api/v1/continental/scores")
