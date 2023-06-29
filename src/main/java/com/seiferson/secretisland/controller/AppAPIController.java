@@ -37,7 +37,7 @@ public class AppAPIController {
         return scoreRepo.findAll(pageable);
     }
 
-    @GetMapping("/ap1/v1/continental/games")
+    @GetMapping("/api/v1/continental/games")
     public List<Game> getGamesInfo(Pageable pageable) {
         List<Score> scores = scoreRepo.findAll();
         Map<String, Game> games = new HashMap<>();
